@@ -12,48 +12,30 @@ def instructions(response):
     if response == "yes":
 	rps.print_instructions(instruction_string)
     
-# Name requirements: must be at least two characters, must be no more than 10 characters, must only be 
-# one name (i.e. no spaces), must start with an upper case letter.
-# Return requirement: name
+
 def check_name(name):
 
-    error = "Somethings wrong"
-
+    error = "Somethings wrong. "
 
     if len(name) > 30:
-        rps.quit_game("Your name is too long!")
+        rps.quit_game(error + "Your name is too long!")
     if len(name) < 2:
-        rps.quit_game("Your name is too short!")
+        rps.quit_game(error + "Your name is too short!")
     if ' ' in name:
-        rps.quit_game("Your name cannot contain spaces!")
+        rps.quit_game(error + "Your name cannot contain spaces!")
     if name[0].isupper() == False:
-        rps.quit_game("Your name must start with an upper case letter!")
+        rps.quit_game(error + "Your name must start with an upper case letter!")
     return name
 
-    # Use if statements, as above, to check if 'name' meets the requirements listed above. If it fails
-    # any condition call rps.quit_game with an appropriate error message.
 
-    # return the variable name once have checked all name requirements
-
-
-
-
-
-# Num requirements: must be more than two and less than 21.
-# Return requirement: num
 def check_times_to_play(num):
     error = "Number is not correct"
-
-    # Check that 'num' meets the requirements above.
-
-    # If 'num' does not meet requirements call rps.quit_game with an error 
-    # message (the variable 'error.')
-    # Note: use function int, to convert num to integer when using it to compare to another integer, i.e. int(num)
-
-    # return the variable num once have checked requirements
-
-
-
+    
+    if int(num) > 21:
+        rps.quit_game(error + "Your number is too big!")
+    if int(num) < 2:
+        rps.quit_game(error + "Your number is too small!")
+    return num
 
 
 def play_game(name):
@@ -64,13 +46,18 @@ def play_game(name):
     # Use the random library to chose a random move for the player.
 
     # Use if statements to check who won. Set who_won equal to 'Computer', 'Player', or 'Tie'
+    
+
     who_won = ""
 
     # After determines who won, build a results string.
     # The next 3 lines partially builds this string. Complete for computer, add for tie, and add line for winner
     results = "Player played " + player_move
     results += "\n"
-    results += "Computer played "
+    results += "Computer played " + computer_move
+
+    if who_won == "Tie":
+        results += "The match was a tie."
 
     # Use rps.display_results to display the results string for the game.
 
@@ -81,18 +68,11 @@ def play_game(name):
 
 def play_match():
 
-    # Call rps.ask_instructions() to see if player wants instructions
     rps.ask_instructions()
 
-
-    # Call rps.get_name() to get a string of the players name
-    # Be sure to save return value, i.e. player_name = rps.get_name()
     player_name = rps.get_name()
 
-
-    # Call rps.get_num_play to get the number of games to play
-    # Be sure to save return value, i.e. num_times = rps.get_num_play()
-    num_times = 0
+    num_times = rps.get_num_play()
 
     
     # Use these variables to keep track of who won
