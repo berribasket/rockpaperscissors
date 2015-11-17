@@ -4,26 +4,14 @@ import rps
 
 
 def instructions(response):
-    # Add to instruction_string so that it contains information on
-    # how to play rock-paper-scissors
     instruction_string = "Choose rock, paper, or scissors from the buttons. "
     instruction_string += "The computer will then choose a move. "
     instruction_string += "Rock beats scissors, scissors beats paper, and paper beats rock."
 
-    # Use a string method to make response all one case
     response = response.lower()
     if response == "yes":
 	rps.print_instructions(instruction_string)
     
-    # Use an if statement to check if the response is "yes"
-    
-    # If the user does want instructions pass instruction_string to
-    # rps.print_instructions
-
-
-
-
-
 # Name requirements: must be at least two characters, must be no more than 10 characters, must only be 
 # one name (i.e. no spaces), must start with an upper case letter.
 # Return requirement: name
@@ -31,8 +19,16 @@ def check_name(name):
 
     error = "Somethings wrong"
 
+
     if len(name) > 30:
-        rps.quit_game(error)
+        rps.quit_game("Your name is too long!")
+    if len(name) < 2:
+        rps.quit_game("Your name is too short!")
+    if ' ' in name:
+        rps.quit_game("Your name cannot contain spaces!")
+    if name[0].isupper() == False:
+        rps.quit_game("Your name must start with an upper case letter!")
+    return name
 
     # Use if statements, as above, to check if 'name' meets the requirements listed above. If it fails
     # any condition call rps.quit_game with an appropriate error message.
@@ -91,7 +87,7 @@ def play_match():
 
     # Call rps.get_name() to get a string of the players name
     # Be sure to save return value, i.e. player_name = rps.get_name()
-    player_name = ""
+    player_name = rps.get_name()
 
 
     # Call rps.get_num_play to get the number of games to play
