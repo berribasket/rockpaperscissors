@@ -6,10 +6,15 @@ import rps
 def instructions(response):
     # Add to instruction_string so that it contains information on
     # how to play rock-paper-scissors
-    instruction_string = ""
+    instruction_string = "Choose rock, paper, or scissors from the buttons. "
+    instruction_string += "The computer will then choose a move. "
+    instruction_string += "Rock beats scissors, scissors beats paper, and paper beats rock."
 
     # Use a string method to make response all one case
-
+    response = response.lower()
+    if response == "yes":
+	rps.print_instructions(instruction_string)
+    
     # Use an if statement to check if the response is "yes"
     
     # If the user does want instructions pass instruction_string to
@@ -81,6 +86,7 @@ def play_game(name):
 def play_match():
 
     # Call rps.ask_instructions() to see if player wants instructions
+    rps.ask_instructions()
 
 
     # Call rps.get_name() to get a string of the players name
